@@ -32,6 +32,9 @@ const MobileNav = () => {
                 />
             </SheetTrigger>
             <SheetContent side="left" className="border-none bg-dark-1">
+                        <SheetHeader>
+                            <SheetTitle></SheetTitle>
+                        </SheetHeader>
                 <Link href="/" className="flex items-center gap-1">
                     <Image 
                         src={'/icons/logo.svg'}
@@ -56,16 +59,16 @@ const MobileNav = () => {
                                         <Link
                                         href={link.route}
                                         key={link.label}
-                                        className={cn('flex items-center gap-4 p-4 rounded-lg', { 'bg-blue-1': isActive })}>
+                                        className={cn('flex items-center gap-4 p-4 rounded-lg w-full ', { 'bg-blue-1': isActive })}>
 
                                         <Image
                                             src={link.imgUrl.startsWith('/') ? link.imgUrl : `/icons/${link.imgUrl}`}
                                             alt={link.label}
                                             width={20}
                                             height={20}
-                                            loading="eager"
+                                            unoptimized
                                         />
-                                        <p className='text-lg  font-semibold max-lg:hidden text-white'>
+                                        <p className=' font-semibold'>
                                             {link.label}
                                         </p>
                                         </Link>
