@@ -1,4 +1,5 @@
-
+'use client'
+import { tokenProvider } from "@/actions/stream.action";
 import { useUser } from "@clerk/nextjs";
 import {
     StreamCall,
@@ -6,6 +7,7 @@ import {
     StreamVideoClient,
     User,
   } from "@stream-io/video-react-sdk";
+import { Loader } from "lucide-react";
   import { ReactNode,useEffect,useState } from "react";
   
   const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
@@ -27,16 +29,20 @@ import {
                 id:user?.id,
                 name:user?.username || user?.id,
                 image:user?.imageUrl,
-            }
+            },
+            tokenProvider: tokenProvider,
           });
-          tokenProvider
+          setvideoClient(client);
+
     },[user,isLoaded]);
 
+    if(!videoClient) return <Loader/>
+
     return (
-    //   <StreamVideo client={videoClient}>
-        
-    //   </StreamVideo>
-    <div></div>
+      <StreamVideo client={videoClient}>
+        {children}
+      </StreamVideo>
+    
     );
   };
 
